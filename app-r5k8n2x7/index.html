@@ -489,11 +489,11 @@ html[data-dark="1"] .hint{background:var(--bg2)}
 /* reading bingo */
 .bingo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .bsq{position:relative;overflow:hidden;min-height:86px;border:1.5px dashed var(--line2);border-radius:12px;padding:8px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;font:inherit;color:var(--ink2);background:transparent;font-size:.74em;line-height:1.2}
-.bsq span{position:relative}.bsq em{position:relative;font-style:normal;font-family:var(--serif);font-size:1.05em;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bsq span{position:relative}.bsq em{position:relative;font-style:normal;font-family:var(--serif);font-size:1.05em;line-height:1.15;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;hyphens:auto}
 .bsq.on{border:0;background:var(--cc);cursor:pointer}.bsq.on span{opacity:.82;font-size:.92em}
 .bsq img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;filter:saturate(.7)}
-.bingo.big .bsq{font-size:.86em;min-height:120px}
-@media(max-width:760px){.bsq{font-size:.62em;padding:6px;border-radius:9px;min-height:0;aspect-ratio:1}.bingo.big .bsq{min-height:0}.bingo.big .bsq{font-size:.66em}.bsq em{-webkit-line-clamp:3}}
+.bingo.lg .bsq{font-size:.86em;min-height:120px}
+@media(max-width:760px){.bsq{font-size:.62em;padding:6px;border-radius:9px;min-height:0;aspect-ratio:1}.bingo.lg .bsq{min-height:0}.bingo.lg .bsq{font-size:.66em}.bsq em{-webkit-line-clamp:3}}
 .sbook{border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--ink2)}
 .sbook.tbr .cv{opacity:.45}
 
@@ -1964,7 +1964,7 @@ function weekCard() {
 function bingoCard(y = BK.year(), big = false) {
   const B = BK.bingo(S, y);
   const cells = B.sq.map((x, i) => `<${x.b ? "button" : "div"} class="bsq ${x.b ? "on" : ""}" ${x.b ? `data-act="book" data-id="${x.b.id}" style="--cc:${clothOf(x.b)};color:${inkOn(clothOf(x.b))}"` : ""}>${x.b && x.b.cover && big ? `<img src="${esc(x.b.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}<span>${esc(x.l)}</span>${x.b ? `<em>${esc(x.b.t)}</em>` : ""}</${x.b ? "button" : "div"}>`).join("");
-  return card(`${y} reading bingo`, `<p class="small muted" style="margin-top:0">Fills itself in as you finish books – no ticking boxes.</p><div class="bingo ${big ? "big" : ""}">${cells}</div>`,
+  return card(`${y} reading bingo`, `<p class="small muted" style="margin-top:0">Fills itself in as you finish books – no ticking boxes.</p><div class="bingo ${big ? "lg" : ""}">${cells}</div>`,
     { soft: "soft", right: `<span class="tiny"><b>${B.n}</b>/16${B.bingos ? ` · ${plural(B.bingos, "bingo")}!` : ""}</span>` });
 }
 function noteCard() {
